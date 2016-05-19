@@ -1,0 +1,5 @@
+export PATH=$HOME/.bin:$PATH
+
+export HISTTIMEFORMAT="%Y-%m-%d_%H:%M:%S "
+
+[[ -r ~/.bashrc ]] && . ~/.bashrc

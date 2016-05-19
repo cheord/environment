@@ -1,0 +1,21 @@
+[[ -r /etc/bashrc ]] && . /etc/bashrc
+
+SANITIZED_PS1=$(echo $PS1 | sed -e 's/\\\$$//')
+PS1="${SANITIZED_PS1}\[\033[1;36m\]\$(get_git_branch)\[\033[0m\]\$ "
+
+function get_git_branch() {
+  local BRANCH=$(git branch --no-color 2>/dev/null | sed -e '/^[^\*]/d' -e 's/^\* \(.*\)/(\1)/')
+  if [ -z "${BRANCH}" ]; then
+    echo ''
+  else
+    echo " ${BRANCH}"
+  fi
+}
+
+alias rm='rm -i'
+alias md5sum='md5'
+
+function ssh {
+    /usr/bin/ssh "$@"
+    printf '\e]0;\a'
+}
